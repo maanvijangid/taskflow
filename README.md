@@ -178,7 +178,7 @@ TaskFlow is a real-time collaborative task manager that enables teams to create,
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/taskflow.git
+git clone https://github.com/maanvijangid/taskflow
 cd taskflow
 ```
 
