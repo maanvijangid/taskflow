@@ -6,8 +6,12 @@
 ![TaskFlow Banner](docs/screenshots/banner.png)
 
 A modern, real-time collaborative task management application built with React, Node.js (TypeScript), and PostgreSQL.
+
 ---
-[Live Demo](https://taskflow-client-p251.onrender.com/login)
+
+# [Live Demo](https://taskflow-client-p251.onrender.com/login)
+
+---
 
 ## Table of Contents
 
