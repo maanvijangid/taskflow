@@ -2,22 +2,12 @@ import { Response } from 'express';
 import { prisma } from '../config/db.js';
 import { AuthRequest } from '../types/index.js';
 
-export const getUsers = async (req: AuthRequest, res: Response): Promise<void> => {
-  const users = await prisma.user.findMany({
-    where: { isActive: true },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      profilePic: true,
-      createdAt: true,
-    },
-    orderBy: { name: 'asc' },
-  });
+export const getUsers = async (_: AuthRequest, res: Response): Promise<void> => {
+  const users = await prisma.user.findMany();
 
   res.json({
     success: true,
-    data: { users },
+    data: users,
   });
 };
 

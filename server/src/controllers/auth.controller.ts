@@ -212,10 +212,10 @@ export const logout = async (_req: Request, res: Response): Promise<void> => {
 /**
  * Get current authenticated user
  */
-export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
+export const getMe = async ({ user }: AuthRequest, res: Response): Promise<void> => {
   res.json({
     success: true,
-    data: { user: req.user },
+    data: { user },
   });
 };
 
