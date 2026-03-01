@@ -12,6 +12,9 @@ import { initializeSocket } from './socket.js';
 const app = express();
 const httpServer = createServer(app);
 
+// 👉 ADD THIS LINE: Tell Express to trust Render's load balancer
+app.set('trust proxy', 1);
+
 // Initialize Socket.IO
 initializeSocket(httpServer);
 
