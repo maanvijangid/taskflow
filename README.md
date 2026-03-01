@@ -1,4 +1,9 @@
+# For detailed usage instructions, see the [User Guide](./user-guide.md).
+
+---
 # TaskFlow - Real-time Collaborative Task Manager
+
+![TaskFlow Banner](docs/screenshots/banner.png)
 
 A modern, real-time collaborative task management application built with React, Node.js (TypeScript), and PostgreSQL.
 
@@ -12,9 +17,6 @@ A modern, real-time collaborative task management application built with React, 
 - [API Documentation](#api-documentation)
 - [Testing](#testing)
 - [Deployment](#deployment)
-- [Assumptions & Trade-offs](#assumptions--trade-offs)
-- [Known Limitations](#known-limitations)
-- [Future Improvements](#future-improvements)
 - [AI Tools Usage](#ai-tools-usage)
 
 ## Overview
@@ -305,18 +307,8 @@ npm run test:coverage
 npm test -- --watch
 ```
 
-### Test Structure
-
-Tests are located in `server/src/__tests__/` and cover:
-- Task domain logic (creation, updates, stages)
-- Subtask operations
-- Activity logging
-- Assignee linking workflow
-- Validation schemas
 
 ## Deployment
-
-### Recommended Platforms
 
 - **Frontend**: Vercel, Netlify, or Cloudflare Pages
 - **Backend**: Railway, Render, or Fly.io
