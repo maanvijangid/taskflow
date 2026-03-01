@@ -93,7 +93,7 @@ TaskFlow is a real-time collaborative task manager that enables teams to create,
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                              Client (React)                              │
+│                              Client (React)                             │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐ │
 │  │   Pages     │  │ Components  │  │ Redux Store │  │  Socket.IO      │ │
 │  │ (Dashboard, │  │ (TaskModal, │  │ (Auth, API  │  │  Client         │ │
@@ -104,16 +104,16 @@ TaskFlow is a real-time collaborative task manager that enables teams to create,
           │                │                │                  │
           ▼                ▼                ▼                  ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                          API Layer (REST + WebSocket)                    │
-│                                                                          │
+│                          API Layer (REST + WebSocket)                   │
+│                                                                         │
 │  HTTP Requests ────────────────────────┐  ┌─────── WebSocket Events     │
-│                                        │  │                              │
-└────────────────────────────────────────┼──┼──────────────────────────────┘
+│                                        │  │                             │
+└────────────────────────────────────────┼──┼──────────────────────────────
                                          │  │
                                          ▼  ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                           Server (Express + Socket.IO)                   │
-│                                                                          │
+│                           Server (Express + Socket.IO)                  │
+│                                                                         │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐  │
 │  │   Routes     │  │ Controllers  │  │  Middleware  │  │   Socket    │  │
 │  │ (auth, task, │  │ (business    │  │ (auth, error,│  │   Handler   │  │
