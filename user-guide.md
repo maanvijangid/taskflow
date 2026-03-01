@@ -1,6 +1,4 @@
 
-Folder highlights
-Project files detail a real-time collaborative task management app using React, TypeScript, and Postgres, with a demo user seeded.
 
 # TaskFlow User Guide
 
@@ -25,8 +23,6 @@ A comprehensive guide to using TaskFlow - your collaborative task management app
    - [Marking as Completed](#marking-as-completed)
    - [Moving Back to TODO](#moving-back-to-todo)
 5. [Task Assignment](#task-assignment)
-   - [Assigning Tasks to Team Members](#assigning-tasks-to-team-members)
-   - [Pending Assignments](#pending-assignments)
 6. [Subtasks](#subtasks)
    - [Adding Subtasks](#adding-subtasks)
    - [Completing Subtasks](#completing-subtasks)
@@ -38,7 +34,6 @@ A comprehensive guide to using TaskFlow - your collaborative task management app
 9. [Notifications](#notifications)
 10. [Trash & Recovery](#trash--recovery)
 11. [Profile Settings](#profile-settings)
-12. [Keyboard Shortcuts](#keyboard-shortcuts)
 
 ---
 
