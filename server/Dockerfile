@@ -3,15 +3,21 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Copy dependency files
 COPY package*.json ./
-COPY prisma ./prisma/
+COPY tsconfig.json ./
+
+# Copy source code
+COPY src ./src
 
 RUN npm ci
 
-COPY . .
+# Generate prisma client
+RUN npx prisma generate
 
-RUN npm run db:generate
+# Build TypeScript
 RUN npm run build
+
 
 # Production stage
 FROM node:20-alpine AS runner
@@ -19,14 +25,15 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV PORT=8800
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 expressjs
+RUN addgroup --system nodejs && adduser --system expressjs
 
+# Copy production files
+COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/src/prisma ./prisma
 
 USER expressjs
 
