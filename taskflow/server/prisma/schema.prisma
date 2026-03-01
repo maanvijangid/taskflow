@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  name          String
+  profilePic    String?
+  googleId      String?  @unique
+  password      String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Tasks created by this user
+  createdTasks  Task[]   @relation("TaskCreator")
+  
+  // Tasks assigned to this user
+  assignedTasks Task[]   @relation("TaskAssignee")
+  
+  // Activities performed by this user
+  activities    Activity[]
+  
+  // Notifications received
+  notifications Notification[] @relation("NotificationReceiver")
+  
+  // Notifications sent
+  sentNotifications Notification[] @relation("NotificationSender")
+
+  @@map("users")
+}
+
+model Task {
+  id            String    @id @default(uuid())
+  title         String
+  description   String?
+  priority      Priority  @default(NORMAL)
+  stage         Stage     @default(TODO)
+  dueDate       DateTime?
+  
+  // Creator relation
+  userId        String
+  user          User      @relation("TaskCreator", fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Assignee relation - can be null if user doesn't exist yet
+  assigneeId    String?
+  assignee      User?     @relation("TaskAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+  
+  // Email of assignee (stored even if user doesn't exist yet)
+  assigneeEmail String?
+  
+  // Soft delete
+  isTrashed     Boolean   @default(false)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  subTasks      SubTask[]
+  activities    Activity[]
+  notifications Notification[]
+
+  @@index([userId])
+  @@index([assigneeId])
+  @@index([assigneeEmail])
+  @@map("tasks")
+}
+
+model SubTask {
+  id          String   @id @default(uuid())
+  title       String
+  isCompleted Boolean  @default(false)
+  
+  taskId      String
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("sub_tasks")
+}
+
+model Activity {
+  id          String       @id @default(uuid())
+  type        ActivityType
+  description String?
+  
+  taskId      String
+  task        Task         @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime     @default(now())
+
+  @@map("activities")
+}
+
+model Notification {
+  id         String           @id @default(uuid())
+  type       NotificationType
+  text       String
+  isRead     Boolean          @default(false)
+  
+  receiverId String
+  receiver   User             @relation("NotificationReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  
+  senderId   String?
+  sender     User?            @relation("NotificationSender", fields: [senderId], references: [id], onDelete: SetNull)
+  
+  taskId     String?
+  task       Task?            @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  createdAt  DateTime         @default(now())
+
+  @@index([receiverId])
+  @@map("notifications")
+}
+
+enum Priority {
+  HIGH
+  MEDIUM
+  NORMAL
+  LOW
+}
+
+enum Stage {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum ActivityType {
+  CREATED
+  ASSIGNED
+  STARTED
+  COMPLETED
+  COMMENTED
+  UPDATED
+}
+
+enum NotificationType {
+  ASSIGNMENT
+  ALERT
+  MESSAGE
+  COMPLETED
+}
