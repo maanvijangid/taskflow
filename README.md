@@ -23,7 +23,7 @@ TaskFlow is a real-time collaborative task manager that enables teams to create,
 
 ### Key Highlights
 
-- **Real-time collaboration**: Changes sync instantly across all connected clients
+- **Real-time collaboration**: Changes sync instantly across all connected clients.
 - **Google OAuth**: Secure authentication with Google accounts
 - **Task assignment by email**: Assign tasks to users even before they sign up
 - **Premium UI**: Modern, responsive design with smooth animations
