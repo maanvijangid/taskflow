@@ -2,8 +2,6 @@
 
 A modern, real-time collaborative task management application built with React, Node.js (TypeScript), and PostgreSQL.
 
-![TaskFlow Demo](docs/demo-screenshot.png)
-
 ## Table of Contents
 
 - [Overview](#overview)
@@ -342,95 +340,11 @@ VITE_API_URL="https://your-backend-domain.com"
 VITE_GOOGLE_CLIENT_ID="..."
 ```
 
-### Deployment Steps (Railway + Vercel)
 
-1. **Database (Railway)**:
-   - Create new PostgreSQL instance
-   - Copy connection URL
-
-2. **Backend (Railway)**:
-   - Connect GitHub repository
-   - Set root directory to `server`
-   - Add environment variables
-   - Deploy
-
-3. **Frontend (Vercel)**:
-   - Import GitHub repository
-   - Set root directory to `client`
-   - Add environment variables
-   - Deploy
-
-## Assumptions & Trade-offs
-
-### Assumptions
-
-1. **Single-tenant application**: Each user sees only their own tasks and those assigned to them
-2. **Email uniqueness**: Email addresses are unique identifiers for users
-3. **Soft delete by default**: Tasks are trashed, not immediately deleted, to prevent accidental data loss
-4. **English-only UI**: No internationalization in initial version
-
-### Trade-offs
-
-| Decision | Trade-off |
-|----------|-----------|
-| **PostgreSQL over MongoDB** | Better relational data integrity vs. flexibility of document model |
-| **JWT in cookies over localStorage** | Better XSS protection vs. CSRF considerations (mitigated with SameSite) |
-| **RTK Query over React Query** | Tighter Redux integration vs. simpler standalone caching |
-| **Socket.IO over plain WebSocket** | Fallback support and room management vs. lighter bundle size |
-| **Prisma over raw SQL** | Type safety and migrations vs. query optimization control |
-
-## Known Limitations
-
-1. **No offline support**: Application requires internet connection
-2. **File uploads not implemented**: Task attachments were deprioritized
-3. **No team/workspace management**: Users cannot create organizations
-4. **Limited search**: Basic title/description search, no full-text search
-5. **No email notifications**: Only in-app notifications implemented
-6. **Google OAuth only**: No other OAuth providers (GitHub, Microsoft)
-
-## Future Improvements
-
-1. **Drag-and-drop**: Kanban board with drag-and-drop task movement
-2. **File attachments**: Upload and attach files to tasks
-3. **Team workspaces**: Create teams and shared task boards
-4. **Email notifications**: Send emails for task assignments and deadlines
-5. **Mobile app**: React Native application
-6. **PWA support**: Offline capability with service workers
-7. **Task templates**: Create reusable task templates
-8. **Recurring tasks**: Set up repeating tasks
-9. **Time tracking**: Log time spent on tasks
-10. **Integration APIs**: Slack, GitHub, Jira integrations
 
 ## AI Tools Usage
 
 ### What I Used AI For
 
 1. **Boilerplate generation**: Initial project structure, Prisma schema setup, Redux store configuration
-2. **Type definitions**: Generating TypeScript interfaces from existing JavaScript code
-3. **Component scaffolding**: Creating base React components with proper TypeScript props
-4. **Error handling patterns**: Implementing consistent error middleware
-
-### What I Reviewed and Changed
-
-1. **Authentication flow**: Manually verified token handling and cookie security settings
-2. **Real-time event naming**: Changed AI-suggested generic names to domain-specific ones
-3. **Database schema relations**: Adjusted cascade behaviors and added proper indexes
-4. **API response formats**: Standardized response structure across all endpoints
-
-### Example: AI Output I Disagreed With
-
-**AI Suggestion**: Store JWT tokens in localStorage for simplicity.
-
-**My Decision**: Use HTTP-only cookies instead.
-
-**Reasoning**: While localStorage is simpler to implement, it's vulnerable to XSS attacks. HTTP-only cookies cannot be accessed via JavaScript, providing better security for sensitive authentication tokens. The trade-off of added complexity (handling CORS, same-site policies) is worth the security benefit.
-
----
-
-## License
-
-MIT License - See [LICENSE](LICENSE) for details.
-
-## Contact
-
-For questions or feedback, please open an issue on GitHub.
+2. **Error handling patterns**: Implementing consistent error middleware
